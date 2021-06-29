@@ -1,0 +1,5 @@
+entity.job.add_form:
+  route_name: entity.job.add_form
+  title: 'Add Job'
+  appears_on:
+    - entity.job.collection

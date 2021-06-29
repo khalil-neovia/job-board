@@ -1,0 +1,5 @@
+name: 'Ecole'
+type: module
+description: 'Ecole'
+core: 8.x
+package: 'Ecole'

@@ -1,0 +1,31 @@
+add job entities:
+  title: 'Create new Job entities'
+
+administer job entities:
+  title: 'Administer Job entities'
+  description: 'Allow to access the administration form to configure Job entities.'
+  restrict access: true
+
+delete job entities:
+  title: 'Delete Job entities'
+
+edit job entities:
+  title: 'Edit Job entities'
+
+view published job entities:
+  title: 'View published Job entities'
+
+view unpublished job entities:
+  title: 'View unpublished Job entities'
+
+view all job revisions:
+  title: 'View all Job revisions'
+
+revert all job revisions:
+  title: 'Revert all Job revisions'
+  description: 'Role requires permission <em>view Job revisions</em> and <em>edit rights</em> for job entities in question or <em>administer job entities</em>.'
+
+delete all job revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Job revisions</em> and <em>delete rights</em> for job entities in question or <em>administer job entities</em>.'
+

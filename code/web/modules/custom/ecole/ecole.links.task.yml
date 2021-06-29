@@ -1,0 +1,26 @@
+# Job routing definition
+job.settings_tab:
+  route_name: job.settings
+  title: 'Settings'
+  base_route: job.settings
+
+entity.job.canonical:
+  route_name: entity.job.canonical
+  base_route: entity.job.canonical
+  title: 'View'
+
+entity.job.edit_form:
+  route_name: entity.job.edit_form
+  base_route: entity.job.canonical
+  title: 'Edit'
+
+entity.job.version_history:
+  route_name: entity.job.version_history
+  base_route: entity.job.canonical
+  title: 'Revisions'
+
+entity.job.delete_form:
+  route_name:  entity.job.delete_form
+  base_route:  entity.job.canonical
+  title: Delete
+  weight: 10
