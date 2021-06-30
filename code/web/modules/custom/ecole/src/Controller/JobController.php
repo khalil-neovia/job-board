@@ -8,6 +8,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use Drupal\ecole\Entity\JobInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Class JobController.
@@ -205,5 +206,91 @@ class JobController extends ControllerBase implements ContainerInjectionInterfac
 
     return $build;
   }
+  private function print_job($value){
+		$node_storage = \Drupal::entityTypeManager()->getStorage('job');
+		$entity = $node_storage->load($value);
+		$field_list=['name'=>"Job Name",'description'=> "Job Description", 'jobdate'=>"Start Date", 'salary'=>"Salary", 'town'=>"Location"];
+		$output="Job n°: ".$entity->id()."<ul>";
+		foreach($field_list as $key=>$my_value){
+			if(isset($entity->get($key)->value)){
+				$output.="<li><strong>".
+				$my_value.
+				"</strong>: ".
+				$entity->get($key)->value .
+				"</li>";
+			}
+		}
+		$output.="</ul>";
+		return($output);
+  }
 
+  
+  public function manageentities() {
+
+	$query = \Drupal::entityQuery('job');
+
+
+	// Use conditions to get a list of published articles.
+	$node_ids = $query->execute();
+	$output="<h3>Use Case: Searching all jobs:</h3>";
+	foreach($node_ids as $key => $value){
+		
+		$output.="<p>".$this->print_job($value)."</p>";
+
+	}
+	$duration='9 day';
+	$output.="<h3>Use Case: Searching within a period of ".$duration."(s):</h3>";
+
+	$date = new DrupalDateTime($duration);
+	$date->setTimezone(new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
+	$formatted = $date->format(DATETIME_DATETIME_STORAGE_FORMAT);
+	
+	$query = \Drupal::entityQuery('job')
+	->condition('jobdate', $formatted, '<=')
+	->execute();
+  
+	foreach($query as $key => $value){
+		
+		$output.="<p>".$this->print_job($value)."</p>";
+
+	}
+	$output.="<h3>Use Case: Searching a range of salary:</h3>";
+	
+	$query = \Drupal::entityQuery('job')
+	->condition('salary', 2000, '>=')
+	->condition('salary', 2800, '<=')
+	->execute();	
+	
+	foreach($query as $key => $value){
+		
+		$output.="<p>".$this->print_job($value)."</p>";
+
+	}
+	
+	//$query->condition('title', '%drupal%','LIKE');
+	$output.="<h3>Use Case: Searching a specefic text:</h3>";
+	
+	$keywords="preparation";
+	$query = \Drupal::entityQuery('job')
+	//->condition('description', "preparation", 'LIKE')
+	//->fieldCondition('field_sku', 'value','%'. $keywords .'%', 'LIKE') 
+	//->fieldCondition('description', 'value','%'. $keywords .'%', 'LIKE')
+	//->condition('description', 'value','%'. $keywords .'%', 'LIKE')
+	->condition('description.value','%'. $keywords .'%', 'LIKE')
+	->execute();	
+	
+	foreach($query as $key => $value){
+		
+		$output.="<p>".$this->print_job($value)."</p>";
+
+	}
+	
+	
+	
+	return array(
+	  '#type' => 'markup',
+	  '#markup' => $output,
+	);
+  }	
+  
 }

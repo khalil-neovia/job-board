@@ -1,0 +1,6 @@
+manageentities:
+  path:  '/ecole/manageentities'
+  defaults:
+    _controller: '\Drupal\ecole\Controller\JobController::manageentities'
+  requirements:
+    _permission: 'access content'
