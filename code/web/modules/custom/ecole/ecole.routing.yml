@@ -4,3 +4,10 @@ manageentities:
     _controller: '\Drupal\ecole\Controller\JobController::manageentities'
   requirements:
     _permission: 'access content'
+ecole.job_form:
+  path: '/ecole/form/jobsearch'
+  defaults:
+    _form: '\Drupal\ecole\Form\JobsearchForm'
+    _title: 'JobsearchForm'
+  requirements:
+    _access: 'TRUE'

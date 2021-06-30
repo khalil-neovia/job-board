@@ -206,21 +206,36 @@ class JobController extends ControllerBase implements ContainerInjectionInterfac
 
     return $build;
   }
-  private function print_job($value){
+  public function print_job($value,$output_format=0){
 		$node_storage = \Drupal::entityTypeManager()->getStorage('job');
 		$entity = $node_storage->load($value);
 		$field_list=['name'=>"Job Name",'description'=> "Job Description", 'jobdate'=>"Start Date", 'salary'=>"Salary", 'town'=>"Location"];
-		$output="Job n°: ".$entity->id()."<ul>";
-		foreach($field_list as $key=>$my_value){
-			if(isset($entity->get($key)->value)){
-				$output.="<li><strong>".
-				$my_value.
-				"</strong>: ".
-				$entity->get($key)->value .
-				"</li>";
+		if($output_format==0){
+			$output="Job n°".$entity->id()." :<ul>";
+			foreach($field_list as $key=>$my_value){
+				if(isset($entity->get($key)->value)){
+					$output.="<li><strong>".
+					$my_value.
+					"</strong>: ".
+					$entity->get($key)->value .
+					"</li>";
+				}
 			}
+			$output.="</ul>";	
 		}
-		$output.="</ul>";
+		elseif($output_format==1){
+			$output="Job n°".$entity->id()." :";
+			foreach($field_list as $key=>$my_value){
+				if(isset($entity->get($key)->value)){
+					$output.=$my_value.": ".$entity->get($key)->value.". ";
+				}
+			}
+			
+		}
+		else{
+			$output="";	
+		}
+
 		return($output);
   }
 
@@ -291,6 +306,17 @@ class JobController extends ControllerBase implements ContainerInjectionInterfac
 	  '#type' => 'markup',
 	  '#markup' => $output,
 	);
-  }	
+  }
+  public function search_for_job($keywords){
+	$query = \Drupal::entityQuery('job');
+  	$group = $query->orConditionGroup()
+	->condition('name.value','%'. $keywords .'%', 'LIKE')
+	->condition('town.value','%'. $keywords .'%', 'LIKE');
+  	
+  	$result=$query->condition($group)->execute();	
+	
+  	return($result);
+  
+  }
   
 }
