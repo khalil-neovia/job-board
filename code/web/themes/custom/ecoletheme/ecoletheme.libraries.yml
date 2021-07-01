@@ -1,0 +1,18 @@
+global:
+  version: 1.x
+  css:
+    theme:
+      /themes/custom/ecoletheme/css/bootstrap.min.css: {}
+  js:
+     /themes/custom/ecoletheme/js/bootstrap.min.js: {}
+specefic:
+  version: 1.x
+  css:
+    theme:
+      /themes/custom/ecoletheme/css/custom.css: {}
+  js:
+     /themes/custom/ecoletheme/js/custom.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings

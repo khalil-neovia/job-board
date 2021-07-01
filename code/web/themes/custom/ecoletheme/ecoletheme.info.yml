@@ -1,0 +1,19 @@
+name: Ecoletheme
+type: theme
+description: Custom theme for the job board
+package: Other
+core: 8.x
+screenshot: screen_shot.png
+libraries:
+  - ecoletheme/global
+  - ecoletheme/specefic
+
+base theme: classy
+
+regions:
+  header: Header
+  banner: Banner
+  sidebar: Side bar
+  rightsidebar: Right Side bar
+  content: Content
+  footer: Footer
