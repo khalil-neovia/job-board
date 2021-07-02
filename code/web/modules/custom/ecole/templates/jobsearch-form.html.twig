@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes }}>
+<div class="row">
+	<div class="col-md-10 offset-md-1 col-sm-12">
+		<div class="page-container-four clearfix submit_new_style submit_new_style-outer">		
+			<div class="row jobsearch">
+				<div class="col-md-6">
+					{{ form.job_title }}
+				</div>
+				<div class="col-md-6">
+					{{ form.submit }}
+				</div>
+				<div class="col-md-12">
+					{{ form | without('job_title','submit') }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>

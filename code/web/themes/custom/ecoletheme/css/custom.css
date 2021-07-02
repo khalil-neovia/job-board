@@ -1,3 +1,17 @@
 div.container  main{
 	display: flex ;
 }
+
+input#edit-job-title{
+	width:100%;
+}
+
+div.jobsearch{
+	display: flex;
+	align-items: flex-end;
+}
+
+nav#block-mainnavigation.block.block-menu.navigation.menu--main ul.menu{
+	display: flex;
+	justify-content: space-evenly;
+}

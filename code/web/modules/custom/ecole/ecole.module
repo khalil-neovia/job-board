@@ -22,3 +22,25 @@ function ecole_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+/**
+ * Implements hook_theme().
+ */
+function ecole_theme() {
+
+
+		return array(
+			// Blocks themes
+			// ---------------------------------------------------------------------
+			
+			'job_add_form' => array(
+				'render element' => 'form',
+				'template' => 'job-add-form',
+			),
+			'jobsearch_form' => array(
+				'render element' => 'form',
+				'template' => 'jobsearch-form',
+			)		
+		);
+	
+}
